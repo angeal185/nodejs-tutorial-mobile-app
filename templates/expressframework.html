@@ -1,0 +1,97 @@
+<ion-view view-title="Express Framework">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget15">
+		<div class="card animated bounceInRight">
+			<div class="center item item-divider bg-color1">
+			  Express Overview
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+		   Express is a minimal and flexible Node.js web application framework that provides a robust set of features to develop web and mobile applications. It facilitates a rapid development of Node based Web applications. Following are some of the core features of Express framework:
+		   </h2>
+		   <div class="list list-inset">
+			<div class="item">Allows to set up middlewares to respond to HTTP Requests.</div>
+			<div class="item">Defines a routing table which is used to perform different action based on HTTP Method and URL.</div>
+			<div class="item">Allows to dynamically render HTML Pages based on passing arguments to templates.</div>
+			</div>
+			</div>
+		</div>
+
+		<div class="card animated bounceInRight">
+			<div class="center item item-divider bg-color1">
+			  Installing Express
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+		   Firstly, install the Express framework globally using npm so that it can be used to create web application using node terminal.
+		   </h2>
+<pre>
+$ npm install express --save
+</pre>
+			<h2>
+			Above command saves installation locally in node_modules directory and creates a directory express inside node_modules. There are following important modules which you should install along with express:
+			</h2>
+			<div class="list list-inset">
+			<div class="item"><b>body-parser</b> - This is a node.js middleware for handling JSON, Raw, Text and URL encoded form data.</div>
+			<div class="item"><b>cookie-parser</b> - Parse Cookie header and populate req.cookies with an object keyed by the cookie names.</div>
+			<div class="item"><b>multer</b> - This is a node.js middleware for handling multipart/form-data.</div>
+			</div>
+<pre>
+$ npm install body-parser --save
+$ npm install cookie-parser --save
+$ npm install multer --save
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInRight">
+			<div class="center item item-divider bg-color1">
+			  Hello world Example
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			   Following is a very basic Express app which starts a server and listens on port 3000 for connection. This app responds with <b>Hello World!</b> for requests to the homepage. For every other path, it will respond with a <b>404 Not Found.</b>
+			  </h2>
+<pre>
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+   res.send('Hello World');
+})
+
+var server = app.listen(8081, function () {
+
+  var host = server.address().address
+  var port = server.address().port
+
+  console.log("Example app listening at http://%s:%s", host, port)
+
+})
+</pre>
+			<h2>
+			Save the above code in a file named server.js and run it with the following command.
+			</h2>
+<pre>
+$ node server.js
+</pre>
+			<h2>
+			You will see the following output:
+			</h2>
+<pre>
+Example app listening at http://0.0.0.0:8081
+</pre>
+			<h2>
+			Open http://127.0.0.1:8081/ in any browser and see the below result.
+			</h2>
+			<img ng-src="img/nodejs_sample2.jpg" />
+			</div>
+		</div>
+				
+	</ion-content>
+	<fab-button ui-sref="app.restful" target-id="scrollFabButtonTarget15">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.webmodule" target-id="scrollFabButtonTarget15">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

@@ -1,0 +1,88 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-balanced" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="center">
+            <ion-nav-buttons side="left">
+                <button id="nav-icon" class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="fabContent"></ion-nav-view>
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-header-bar class="dark-bg expanded">
+            <img src="img/nodejs.png" class="avatar motion spin fade">
+            
+        </ion-header-bar>
+        <ion-content class="stable-bg has-expanded-header scroll-menu">
+            <ion-list>
+                <ion-item nav-clear menu-close ui-sref="app.home">
+                    <i class="icon ion-android-home"></i> Home
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.favourite">
+                    <i class="icon ion-star"></i> Favourite
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.settings">
+                    <i class="icon ion-gear-a"></i> Settings
+                </ion-item>
+                <hr>
+                <ion-item nav-clear menu-close ui-sref="app.intro">
+                   <i class="ion-social-nodejs"></i> Introduction
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.setup">
+                    <i class="ion-social-nodejs"></i> Environment Setup
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.firstapp">
+                     <i class="ion-social-nodejs"></i> First Application
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.terminal">
+                    <i class="ion-social-nodejs"></i> REPL Terminal
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.npm">
+                    <i class="ion-social-nodejs"></i> Package Manager (NPM)
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.callback">
+                    <i class="ion-social-nodejs"></i> Callbacks Concept
+                </ion-item>
+                <hr>
+                <ion-item nav-clear menu-close ui-sref="app.eventloop">
+                    <i class="ion-social-nodejs"></i> Event Loop
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.eventemitter">
+                    <i class="ion-social-nodejs"></i> Event Emitter
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.buffers">
+                    <i class="ion-social-nodejs"></i> Buffers
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.streams">
+                    <i class="ion-social-nodejs"></i> Streams
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.filesystem">
+                    <i class="ion-social-nodejs"></i> File System
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.globalobjects">
+                    <i class="ion-social-nodejs"></i> Global Objects
+                </ion-item>
+                <hr>
+                <ion-item nav-clear menu-close ui-sref="app.utilitymodule">
+                    <i class="ion-social-nodejs"></i> Utility Modules
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.webmodule">
+                    <i class="ion-social-nodejs"></i> Web Module
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.expressframework">
+                    <i class="ion-social-nodejs"></i> Express Framework
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.restful">
+                    <i class="ion-social-nodejs"></i> RESTFul API
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.scalingapp">
+                    <i class="ion-social-nodejs"></i> Scaling Application
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.packaging">
+                    <i class="ion-social-nodejs"></i> Packaging
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,212 @@
+<ion-view view-title="Buffers">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget9">
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  Intro
+			</div>
+			<div class="item item-text-wrap">
+				<h2>
+					Pure JavaScript is Unicode friendly but not nice to binary data. When dealing with TCP streams or the file system, it's necessary to handle octet streams. Node provides Buffer class which provides instances to store raw data similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.
+					<br>
+					Buffer class is a global class and can be accessed in application without importing buffer module.
+				</h2>
+			</div>
+		</div>
+
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color1">
+			  Creating Buffers
+			</div>
+			<div class="item item-text-wrap">
+				<h2>
+					Node Buffer can be constructed in a variety of ways.
+				</h2>
+				<h2>
+					<b>Method 1</b><br>
+					Following is the syntax to create an uninitiated Buffer of 10 octets:
+				</h2>
+<pre>
+var buf = new Buffer(10);
+</pre>
+				<h2>
+				<b>Method 2</b><br>
+				Following is the syntax to create a Buffer from a given array:
+				</h2>
+<pre>
+var buf = new Buffer([10, 20, 30, 40, 50]);
+</pre>
+				<h2>
+				<b>Method 3</b><br>
+				Following is the syntax to create a Buffer from a given string and optionally encoding type:
+				</h2>
+<pre>
+var buf = new Buffer("Simply Easy Learning", "utf-8");
+</pre>
+				<h2>
+				Though "utf8" is the default encoding but you can use either of the encodings "ascii", "utf8", "utf16le", "ucs2", "base64" or "hex".
+				</h2>
+			</div>
+		</div>
+
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  Writing to Buffers
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			<b>Syntax</b><br>
+			Following is the syntax of the method to write into a Node Buffer:
+			</h2>
+<pre>
+buf.write(string[, offset][, length][, encoding])
+</pre>
+				<h2>
+				<b>Parameters</b><br>
+				Here is the description of the parameters used:
+				</h2>
+				<div class="list list-inset">
+				<div class="item"><b>string</b> - This is string data to be written to buffer.</div>
+				<div class="item"><b>offset</b> - This is the index of the buffer to start writing at. Default value is 0.</div>
+				<div class="item"><b>length</b> - This is the number of bytes to write. Defaults to buffer.length</div>
+				<div class="item"><b>encoding</b> - Encoding to use. 'utf8' is the default encoding</div>
+				</div>
+				<h2>
+<b>Return Value</b><br>
+This method returns number of octets written. If there is not enough space in the buffer to fit the entire string, it will write a part of the string.
+</h2>
+				<h2>
+				<b>Example</b>
+				</h2>
+<pre>
+buf = new Buffer(256);
+len = buf.write("Simply Easy Learning");
+
+console.log("Octets written : "+  len);
+</pre>
+				<h2>
+				When above program is executed, it produces following result:
+				</h2>
+<pre>
+Octets written : 20
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color1">
+			  Reading from Buffers
+			</div>
+			<div class="item item-text-wrap">
+				<h2>
+				<b>Syntax</b><br>
+				Following is the syntax of the method to read data from a Node Buffer:
+				</h2>
+<pre>
+buf.toString([encoding][, start][, end])
+</pre>
+<h2>
+<b>Parameters</b><br>
+Here is the description of the parameters used:
+</h2>
+<div class="list list-inset">
+<div class="item"><b>encoding</b> - Encoding to use. 'utf8' is the default encoding</div>
+<div class="item"><b>start</b> - Beginning index to start reading, defaults to 0.</div>
+<div class="item"><b>end</b> - End index to end reading, defaults is complete buffer.</div>
+</div>
+<h2>
+<b>Return Value</b><br>
+This method decodes and returns a string from buffer data encoded using the specified character set encoding.
+</h2>
+<h2>
+<b>Example</b><br>
+</h2>
+<pre>
+buf = new Buffer(26);
+for (var i = 0 ; i < 26 ; i++) {
+  buf[i] = i + 97;
+}
+
+console.log( buf.toString('ascii'));       // outputs: abcdefghijklmnopqrstuvwxyz
+console.log( buf.toString('ascii',0,5));   // outputs: abcde
+console.log( buf.toString('utf8',0,5));    // outputs: abcde
+console.log( buf.toString(undefined,0,5)); // encoding defaults to 'utf8', outputs abcde
+</pre>
+<h2>
+When above program is executed, it produces following result:
+</h2>
+<pre>
+abcdefghijklmnopqrstuvwxyz
+abcde
+abcde
+abcde
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  Copy Buffer
+			</div>
+			<div class="item item-text-wrap">
+<h2>
+<b>Syntax</b><br>
+Following is the syntax of the method to copy a node buffer:
+</h2>
+<pre>
+buf.copy(targetBuffer[, targetStart][, sourceStart][, sourceEnd])
+</pre>
+<h2>
+<b>Parameters</b><br>
+Here is the description of the parameters used:
+</h2>
+<div class="list list-inset">
+<div class="item"><b>targetBuffer</b> - Buffer object where buffer will be copied.</div>
+<div class="item"><b>targetStart</b> - Number, Optional, Default: 0</div>
+<div class="item"><b>sourceStart</b> - Number, Optional, Default: 0</div>
+<div class="item"><b>sourceEnd</b> - Number, Optional, Default: buffer.length</div>
+</div>
+<h2>
+<b>Return Value</b><br>
+No return value. Copies data from a region of this buffer to a region in the target buffer even if the target memory region overlaps with the source. If undefined the targetStart and sourceStart parameters default to 0 while sourceEnd defaults to buffer.length.
+</h2>
+<h2>
+<b>Example</b>
+</h2>
+<pre>
+var buffer1 = new Buffer('ABC');
+//copy a buffer
+var buffer2 = new Buffer(3);
+buffer1.copy(buffer2);
+console.log("buffer2 content: " + buffer2.toString());
+</pre>
+<h2>
+When above program is executed, it produces following result:
+</h2>
+<pre>
+buffer2 content: ABC
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color1">
+			  Class Methods
+			</div>
+			<div class="item item-text-wrap">
+				<div class="list list-inset">
+					<div class="item">Buffer.isEncoding(encoding)</div>
+					<div class="item">Buffer.isBuffer(obj)</div>
+					<div class="item">Buffer.byteLength(string[, encoding])</div>
+					<div class="item">Buffer.concat(list[, totalLength])</div>
+					<div class="item">Buffer.compare(buf1, buf2)</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.streams" target-id="scrollFabButtonTarget9">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.eventemitter" target-id="scrollFabButtonTarget9">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

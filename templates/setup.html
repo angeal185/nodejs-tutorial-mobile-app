@@ -1,0 +1,104 @@
+<ion-view view-title="Environment Setup">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget3">
+		<div class="card animated zoomInLeft">
+		  <div class="center item item-divider bg-color2">
+		    Download Node.js archive
+		  </div>
+		  <div class="item item-text-wrap">
+		   <h2>
+		    Download latest version of Node.js installable archive file from Node.js 
+		   </h2>
+		   <span class="center">
+		   <a href="https://nodejs.org/en/download/" class="button button-clear" onclick="window.open(this.href, '_blank', 'location=yes');return false;">Download Node.js</a>
+		   </span>
+		  </div>
+		</div>
+
+		<div class="card animated zoomInRight">
+		  <div class="center item item-divider bg-color2">
+		    Installation on UNIX/Linux
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		    Based on your OS architecture, download and extract the archive node-v4.2.3-osname.tar.gz into /tmp, and then finally move extracted files into /usr/local/nodejs directory. For example:
+		   </h2>
+		   <br>
+<pre>
+$ cd /tmp
+$ wget http://nodejs.org/dist/v0.12.0/node-v0.12.0-linux-x64.tar.gz
+$ tar xvfz node-v0.12.0-linux-x64.tar.gz
+$ mkdir -p /usr/local/nodejs
+$ mv node-v0.12.0-linux-x64/* /usr/local/nodejs
+</pre>
+			<div class="row">
+				<div class="col">
+					<h2><b>OS</b></h2>
+				</div>
+				<div class="col">
+					<h2><b>Output</b></h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h2>Linux</h2>
+				</div>
+				<div class="col">
+					<h2>export PATH=$PATH:/usr/local/nodejs/bin</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h2>Mac</h2>
+				</div>
+				<div class="col">
+					<h2>export PATH=$PATH:/usr/local/nodejs/bin</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h2>FreeBSD</h2>
+				</div>
+				<div class="col">
+					<h2>export PATH=$PATH:/usr/local/nodejs/bin</h2>
+				</div>
+			</div>
+		  </div>
+		</div>
+
+		<div class="card animated zoomInLeft">
+		  <div class="center item item-divider bg-color2">
+		    Installation on Windows
+		  </div>
+		  <div class="item item-text-wrap">
+		   <h2>
+		    Use the MSI file and follow the prompts to install the Node.js. By default, the installer uses the Node.js distribution in C:\Program Files\nodejs. The installer should set the C:\Program Files\nodejs\bin directory in window's PATH environment variable. Restart any open command prompts for the change to take effect. 
+		   </h2>
+		  </div>
+		</div>
+
+		<div class="card animated zoomInRight">
+		  <div class="center item item-divider bg-color2">
+		    Verify installation
+		  </div>
+		  <div class="item item-text-wrap">
+		   <h2>
+		    Create a js file named main.js on your machine (Windows or Linux) having the following code.
+		   </h2>
+<pre>
+/* Hello, World! program in node.js */
+console.log("Hello, World!")
+</pre>
+			<h2>Now execute main.js file using Node.js interpreter to see the result:</h2>
+<pre>$ node main.js</pre>
+			<h2>If everything is fine with your installation, this should produce the following result:</h2>
+<pre>Hello, World!</pre>
+		  </div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.firstapp" target-id="scrollFabButtonTarget3">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.intro" target-id="scrollFabButtonTarget3">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

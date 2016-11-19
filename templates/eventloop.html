@@ -1,0 +1,96 @@
+<ion-view view-title="Event Loop">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget7">
+		<div class="card animated zoomInUp">
+			<div class="center item item-divider bg-color2">
+			  Intro
+			</div>
+			<div class="item item-text-wrap">
+				<h2>
+					Node js is a single threaded application but it support concurrency via concept of event and callbacks. As every API of Node js are asynchronous and being a single thread, it uses async function calls to maintain the concurrency. Node uses observer pattern. Node thread keeps an event loop and whenever any task get completed, it fires the corresponding event which signals the event listener function to get executed.
+				</h2>
+			</div>
+		</div>
+
+		<div class="card animated zoomInUp">
+			<div class="center item item-divider bg-color2">
+			  Event Driven Programming
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+				Node.js uses events heavily and it is also one of the reasons why Node.js is pretty fast compared to other similar technologies. As soon as Node starts its server, it simply initiates its variables, delcares functions and then simply waits for event to occur.
+
+				In an event-driven application, there is generally a main loop that listens for events, and then triggers a callback function when one of those events is detected.
+			</h2>
+			<br>
+			<img ng-src="img/event_loop.jpg" />
+			<br>
+			<h2>
+			While Events seems similar to what callbacks are. The difference lies in the fact that callback functions are called when an asynchronous function returns its result where as event handling works on the observer pattern. The functions which listens to events acts as Observers. Whenever an event gets fired, its listener function starts executing. Node.js has multiple in-built events available through events module and EventEmitter class which is used to bind events and event listeners as follows:
+			</h2>
+<pre>
+// Import events module
+var events = require('events');
+// Create an eventEmitter object
+var eventEmitter = new events.EventEmitter();
+</pre>
+			<h2>
+			Following is the syntax to bind event handler with an event:
+			</h2>
+<pre>
+// Bind event and even handler as follows
+eventEmitter.on('eventName', eventHandler);
+</pre>
+			<h2>
+			We can fire an event programatically as follows:
+			</h2>
+<pre>
+// Fire an event 
+eventEmitter.emit('eventName');
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated zoomInUp">
+			<div class="center item item-divider bg-color2">
+			  How Node Applications Work?
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+				In Node Application, any async function accepts a callback as a last parameter and the callback function accepts error as a first parameter. Let's revisit the previous example again. Create a text file named input.txt having following content
+			</h2>
+<pre>
+You have to dream before your dreams can come true.
+</pre>
+			<h2>
+			Create a js file named main.js having the following code:
+			</h2>
+<pre>
+var fs = require("fs");
+
+fs.readFile('input.txt', function (err, data) {
+   if (err){
+      console.log(err.stack);
+      return;
+   }
+   console.log(data.toString());
+});
+console.log("Program Ended");
+</pre>
+			<h2>
+			Here fs.readFile() is a async function whose purpose is to read a file. If an error occurs during read of file, then err object will contain the corresponding error else data will contain the contents of the file. readFile passes err and data to callback function after file read operation is complete, which finally prints the content.
+			</h2>
+<pre>
+Program Ended
+You have to dream before your dreams can come true.
+</pre>
+			</div>
+		</div>
+
+	</ion-content>
+	<fab-button ui-sref="app.eventemitter" target-id="scrollFabButtonTarget7">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.callback" target-id="scrollFabButtonTarget7">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

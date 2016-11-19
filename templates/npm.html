@@ -1,0 +1,157 @@
+<ion-view view-title="Package Manager (NPM)">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget5">
+		<div class="card animated swing">
+		  <div class="center item item-divider bg-color2">
+		    Node.js - npm
+		  </div>
+		  <div class="item item-text-wrap">
+		   	<h2>
+		   	Node Package Manager (npm) provides following two main functionalities:
+		   	</h2>
+		   	<div class="list list-inset">
+			<div class="item">Online repositories for node.js packages/modules which are searchable on search.nodejs.org
+			</div>
+			<div class="item">
+			Command line utility to install Node.js packages, do version management and dependency management of Node.js packages.
+			</div>
+			</div>
+			<h2>
+			npm comes bundled with Node.js installables after v0.6.3 version. To verify the same, open console and type following command and see the result:
+			</h2>
+<pre>
+$ npm --version
+2.7.1
+</pre>
+			<h2>
+			If you are running old version of npm then its damn easy to update it to the latest version. Just use the following command from root:
+			</h2>
+			<pre>
+$ sudo npm install npm -g
+/usr/bin/npm -> /usr/lib/node_modules/npm/bin/npm-cli.js
+npm@2.7.1 /usr/lib/node_modules/npm
+</pre>
+		  </div>
+		</div>
+
+		<div class="card animated swing">
+		  <div class="center item item-divider bg-color2">
+		    Installing Modules using npm
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		  	There is a simple syntax to install any Node.js module:
+		  </h2>
+<pre>
+$ npm install <Module Name>
+</pre>
+			<h2>
+			For example, following is the command to install a famous Node.js web framework module called express:
+			</h2>
+<pre>
+$ npm install express
+</pre>
+			<h2>
+			Now you can use this module in your js file as following:
+			</h2>
+<pre>
+var express = require('express');
+</pre>
+		  </div>
+		</div>
+
+		<div class="card animated swing">
+		  <div class="center item item-divider bg-color2">
+		    Uninstalling a module
+		  </div>
+		  <div class="item item-text-wrap">
+		   	<h2>Use following command to uninstall a Node.js module.</h2>
+<pre>
+$ npm uninstall express
+</pre>
+			<h2>
+			Once npm uninstall the package, you can verify by looking at the content of /node_modules/ directory or type the following command:
+			</h2>
+<pre>
+$ npm ls
+</pre>
+		  </div>
+		</div>
+
+		<div class="card animated swing">
+		  <div class="center item item-divider bg-color2">
+		    Updating a module
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		  Update package.json and change the version of the dependency which to be updated and run the following command.
+		  </h2>
+<pre>
+$ npm update express
+</pre>
+		  </div>
+		</div>
+
+		<div class="card animated swing">
+		  <div class="center item item-divider bg-color2">
+		    Search a module
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		  Search package name using npm.
+		  </h2>
+<pre>
+$ npm search express
+</pre>
+		  </div>
+		</div>
+
+		<div class="card animated swing">
+		  <div class="center item item-divider bg-color2">
+		    Create a module
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		  	Creation of module requires package.json to be generated. Let's generate package.json using npm, which will generate basic skeleton of the package.json.
+		  </h2>
+<pre>
+$ npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sane defaults.
+
+See 'npm help json' for definitive documentation on these fields
+and exactly what they do.
+
+Use 'npm install <pkg> --save' afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+name: (webmaster)
+</pre>
+			<h2>
+			You will need to provide all the required information about your module. YOu can take help from the above mentioned package.json file to understand the meanings of various information demanded. Once package.json is generated. Use the following command to register yourself with npm repository site using a valid email address.
+			</h2>
+<pre>
+$ npm adduser
+Username: mcmohd
+Password:
+Email: (this IS public) mcmohd@gmail.com
+</pre>
+<h2>
+Now its time to publish your module:
+</h2>
+<pre>
+$ npm publish
+</pre>
+			<h2>
+			If everything is fine with your module, then it will be published in the reporsitory and will be accessible to install using npm like any other other Node.js module.
+			</h2>
+		  </div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.callback" target-id="scrollFabButtonTarget5">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.terminal" target-id="scrollFabButtonTarget5">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

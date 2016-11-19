@@ -1,0 +1,110 @@
+<ion-view view-title="Callbacks Concept">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget6">
+		<div class="card animated bounce">
+		  <div class="center item item-divider bg-color">
+		    What is Callback?
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		  	Callback is an asynchronous equivalent for a function. A callback function is called at the completion of a given task. Node makes heavy use of callbacks. All APIs of Node are written is such a way that they supports callbacks.
+		  	<br>
+		  	<br>
+			For example, a function to read a file may start reading file and return the control to execution environment immidiately so that next instruction can be executed. Once file I/O is complete, it will call the callback function while passing the callback function, the content of the file as parameter. So there is no blocking or wait for File I/O. This makes Node.js highly scalable, as it can process high number of request without waiting for any function to return result.
+		  </h2>
+		  </div>
+		</div>
+
+		<div class="card animated bounce">
+		  <div class="center item item-divider bg-color">
+		    Blocking Code Example
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		  	Create a text file named input.txt having following content
+		  </h2>
+<pre>
+You have to dream before your dreams can come true.
+</pre>
+			<h2>
+			Create a js file named main.js which has the following code:
+			</h2>
+<pre>
+var fs = require("fs");
+
+var data = fs.readFileSync('input.txt');
+
+console.log(data.toString());
+console.log("Program Ended");
+</pre>
+			<h2>
+			Now run the main.js to see the result:
+			</h2>
+<pre>
+$ node main.js
+</pre>
+<h2>
+Verify the Output
+</h2>
+<pre>
+You have to dream before your dreams can come true.
+
+Program Ended
+</pre>
+		  </div>
+		</div>
+
+		<div class="card animated bounce">
+		  <div class="center item item-divider bg-color">
+		    Non-Blocking Code Example
+		  </div>
+		  <div class="item item-text-wrap">
+		  	<h2>
+		  		Create a text file named input.txt having following content
+		  	</h2>
+<pre>
+You have to dream before your dreams can come true.
+</pre>
+			<h2>
+			Update main.js file to have following code:
+			</h2>
+<pre>
+var fs = require("fs");
+
+fs.readFile('input.txt', function (err, data) {
+    if (err) return console.error(err);
+    console.log(data.toString());
+});
+
+console.log("Program Ended");
+</pre>
+			<h2>
+			Now run the main.js to see the result:
+			</h2>
+<pre>
+$ node main.js
+</pre>
+			<h2>
+			Verify the Output
+			</h2>
+<pre>
+Program Ended
+
+You have to dream before your dreams can come true.
+</pre>
+			<h2>
+			These two examples explain the concept of blocking and non-blocking calls. First example shows that program blocks until it reads the file and then only it proceeds to end the program where as in second example, program does not wait for file reading but it just proceeded to print "Program Ended" and same time program without blocking continues reading the file.
+			</h2>
+			<br>
+			<h2>
+			Thus, a blocking program executes very much in sequence and from programming point of view its easier to implement the logic but non-blocking programs does not execute in sequence, so in case a program needs to use any data to be processed, it should be kept with-in the same block to make it sequential execution.
+			</h2>
+		  </div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.eventloop" target-id="scrollFabButtonTarget6">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.npm" target-id="scrollFabButtonTarget6">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

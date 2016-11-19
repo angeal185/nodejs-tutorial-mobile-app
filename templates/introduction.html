@@ -1,0 +1,61 @@
+<ion-view view-title="Introduction">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget2">
+		<div class="card animated flipInX">
+		  <div class="center item item-divider bg-color1">
+		    What is Node.js?
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		    Node.js is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+		   </h2>
+		  </div>
+		</div>
+
+		<div class="card wow animated flipInY">
+		  <div class="center item item-divider bg-color1">
+		    Features of Node.js
+		  </div>
+		  <div class="item item-text-wrap">
+			 <div class="list list-inset">
+			 	<div class="item"><h2>Asynchronous and Event Driven</h2></div>
+			 	<div class="item"><h2>Very Fast</h2></div>
+			 	<div class="item"><h2>Single Threaded but Highly Scalable</h2></div>
+			 	<div class="item"><h2>No Buffering </h2></div>
+			 </div>
+		  </div>
+		</div>
+
+		<div class="card wow animated flipInX">
+		  <div class="center item item-divider bg-color1">
+		    Who Uses Node.js?
+		  </div>
+		  <div class="item item-text-wrap">
+		  <h2>
+		    Following is the link on github wiki containing an exhaustive list of projects, application and companies which are using Node.js. This list includes eBay, General Electric, GoDaddy, Microsoft, PayPal, Uber, Wikipins, Yahoo!, and Yammer to name a few.
+		   </h2>
+		   <a href="https://github.com/joyent/node/wiki/projects,-applications,-and-companies-using-node" class="button button-clear" onclick="window.open(this.href, '_blank', 'location=yes');return false;">Projects, Applications Using Node</a>
+		  </div>
+		</div>
+
+		<div class="card wow animated flipInY">
+		  <div class="center item item-divider bg-color1">
+		    Where to Use Node.js?
+		  </div>
+		  <div class="item item-text-wrap">
+			 <div class="list list-inset">
+			 	<div class="item"><h2>I/O bound Applications</h2></div>
+			 	<div class="item"><h2>Data Streaming Applications</h2></div>
+			 	<div class="item"><h2>Data Intensive Real time Applications (DIRT)</h2></div>
+			 	<div class="item"><h2>JSON APIs based Applications</h2></div>
+			 	<div class="item"><h2>Single Page Applications</h2></div>
+			 </div>
+		  </div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.setup" target-id="scrollFabButtonTarget2">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.home"  target-id="scrollFabButtonTarget2">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

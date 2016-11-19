@@ -1,0 +1,263 @@
+<ion-view view-title="Streams">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget10">
+		<div class="card animated pulse">
+			<div class="center item item-divider bg-color2">
+			  What are Streams?
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			Streams are objects that let you read data from a source or write data to a destination in continous fashion. In Node.js, there are four types of streams.
+			</h2>
+			<div class="list list-inset">
+			<div class="item"><b>Readable</b> - Stream which is used for read operation.</div>
+
+			<div class="item"><b>Writable</b> - Stream which is used for write operation.</div>
+
+			<div class="item"><b>Duplex</b> - Stream which can be used for both read and write operation.</div>
+
+			<div class="item"><b>Transform</b> - A type of duplex stream where the output is computed based on input.</div>	
+			</div>
+			<h2>
+			Each type of Stream is an EventEmitter instance and throws several events at different instance of times. For example, some of the commonly used events are:
+			</h2>
+			<div class="list list-inset">
+			<div class="item"><b>data</b> - This event is fired when there is data is available to read.</div>
+
+			<div class="item"><b>end</b> - This event is fired when there is no more data to read.</div>
+
+			<div class="item"><b>error</b> - This event is fired when there is any error receiving or writing data.</div>
+
+			<div class="item"><b>finish</b> - This event is fired when all data has been flushed to underlying system.</div>
+			</div>
+			<h2>
+			This tutorial will give you understanding on commonly used operations on Streams.
+			</h2>
+			</div>
+		</div>
+
+		<div class="card animated pulse">
+			<div class="center item item-divider bg-color2">
+			  Reading from stream
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			Create a text file named input.txt having following content
+			</h2>
+<pre>
+You have to dream before your dreams can come true.
+</pre>
+			<h2>
+			Create a js file named main.js which has the following code:
+			</h2>
+<pre>
+var fs = require("fs");
+var data = '';
+
+// Create a readable stream
+var readerStream = fs.createReadStream('input.txt');
+
+// Set the encoding to be utf8. 
+readerStream.setEncoding('UTF8');
+
+// Handle stream events --> data, end, and error
+readerStream.on('data', function(chunk) {
+   data += chunk;
+});
+
+readerStream.on('end',function(){
+   console.log(data);
+});
+
+readerStream.on('error', function(err){
+   console.log(err.stack);
+});
+
+console.log("Program Ended");
+</pre>
+				<h2>
+				Now run the main.js to see the result:
+				</h2>
+<pre>
+$ node main.js
+</pre>
+				<h2>
+				Verify the Output
+				</h2>
+<pre>
+Program Ended
+You have to dream before your dreams can come true.
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated pulse">
+			<div class="center item item-divider bg-color2">
+			  Writing to stream
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			Create a js file named main.js which has the following code:
+			</h2>
+<pre>
+var fs = require("fs");
+var data = 'Simply Easy Learning';
+
+// Create a writable stream
+var writerStream = fs.createWriteStream('output.txt');
+
+// Write the data to stream with encoding to be utf8
+writerStream.write(data,'UTF8');
+
+// Mark the end of file
+writerStream.end();
+
+// Handle stream events --> finish, and error
+writerStream.on('finish', function() {
+    console.log("Write completed.");
+});
+
+writerStream.on('error', function(err){
+   console.log(err.stack);
+});
+
+console.log("Program Ended");
+</pre>
+				<h2>
+				Now run the main.js to see the result:
+				</h2>
+<pre>
+$ node main.js
+</pre>
+				<h2>
+				Verify the Output
+				</h2>
+<pre>
+Program Ended
+Write completed.
+</pre>
+				<h2>
+				Now open output.txt created in your current directory and verify the following content available in output.txt file.
+				</h2>
+<pre>
+Simply Easy Learning
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated pulse">
+			<div class="center item item-divider bg-color2">
+			  Piping streams
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			Piping is a mechanism where we provide output of one stream as the input to another stream. It is normally used to get data from one stream and to pass output of that stream to another stream. There is no limit on piping operations. Now we'll show a piping example for reading from one file and writing it to another file.
+			</h2>
+			<br>
+			<h2>
+			Create a js file named main.js which has the following code:
+			</h2>
+<pre>
+var fs = require("fs");
+
+// Create a readable stream
+var readerStream = fs.createReadStream('input.txt');
+
+// Create a writable stream
+var writerStream = fs.createWriteStream('output.txt');
+
+// Pipe the read and write operations
+// read input.txt and write data to output.txt
+readerStream.pipe(writerStream);
+
+console.log("Program Ended");
+</pre>
+			<h2>
+			Now run the main.js to see the result:
+			</h2>
+<pre>
+$ node main.js
+</pre>
+			<h2>
+			Verify the Output
+			</h2>
+<pre>
+Program Ended
+</pre>
+<h2>
+Open output.txt created in your current directory and verify the following content available in output.txt file.
+</h2>
+<pre>
+You have to dream before your dreams can come true.
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated pulse">
+			<div class="center item item-divider bg-color2">
+			  Chaining streams
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			Chanining is a mechanism to connect output of one stream to another stream and create a chain of multiple stream operations. It is normally used with piping operations. Now we'll use the piping and chaining to first compress a file and then decompress the same.
+			<br>
+			Create a js file named main.js which has the following code:
+			</h2>
+<pre>
+var fs = require("fs");
+var zlib = require('zlib');
+
+// Compress the file input.txt to input.txt.gz
+fs.createReadStream('input.txt')
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream('input.txt.gz'));
+  
+console.log("File Compressed.");
+</pre>
+				<h2>
+				Now run the main.js to see the result:
+				</h2>
+<pre>
+$ node main.js
+</pre>
+				<h2>
+				Verify the Output
+				</h2>
+<pre>
+File Compressed.
+</pre>
+				<h2>
+				You will find that input.txt file has been compressed and it created a file input.txt.gz in the current directory. Now let's try to decompress the same file using the following code.
+				</h2>
+<pre>
+var fs = require("fs");
+var zlib = require('zlib');
+
+// Decompress the file input.txt.gz to input.txt
+fs.createReadStream('input.txt.gz')
+  .pipe(zlib.createGunzip())
+  .pipe(fs.createWriteStream('input.txt'));
+  
+console.log("File Decompressed.");
+</pre>
+				<h2>
+				Now run the main.js to see the result:
+				</h2>
+<pre>
+$ node main.js
+</pre>
+				<h2>
+				Verify the Output
+				</h2>
+<pre>
+File Decompressed.
+</pre>
+			</div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.filesystem" target-id="scrollFabButtonTarget10">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.buffers" target-id="scrollFabButtonTarget10">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

@@ -1,0 +1,116 @@
+<ion-view view-title="Packaging">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget18">
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  Intro
+			</div>
+			<div class="item item-text-wrap">
+				<h2>
+				Node.js code is open and ready to be copied like any other Javascript code. But now its not possible anymore. JXcore which is an open source project, introduces a unique feature for packaging and encryption of source files and other assets into JX packages.
+				<br>
+	            Consider you have a large project consisting of many files. JXcore is very much able to pack them all into a single file to simplify the distribution. This tutorial will give you a quick overview about the whole process starting from installing JXcore.
+	            </h2>
+			</div>
+		</div>
+
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  JXcore Installation
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+				Installing a JXcore is as simple as just download and unpack the package which provide jx binary to start with. So let's follow the following steps:
+			</h2>
+			<h2>
+			<b>Step 1</b><br><br>
+			Download JXcore package from the http://jxcore.com/downloads/, as per your operating system and machine architecture. We downloaded a package for Cenots running on 64 bit machine.
+			</h2>
+			<pre>
+			$ wget https://s3.amazonaws.com/nodejx/jx_rh64.zip
+			</pre>
+			<h2>
+			<b>Step 2</b><br><br>
+			Unpack the downloaded file jx_rh64.zip and copy jx binary into /usr/bin or may be in any other directory based on your system setup.
+			</h2>
+<pre>
+$ unzip jx_rh64.zip
+$ cp jx_rh64/jx /usr/bin
+</pre>
+			<h2>
+			<b>Step 3</b><br><br>
+			Finally set your PATH variable appropriately to run jx from anywhere you like.
+			</h2>
+<pre>
+$ export PATH=$PATH:/usr/bin
+</pre>
+			<h2>
+			<b>Step 4</b><br><br>
+			You can verify your installation by issuing a simple command. If everything is fine then you will find it working and printing its version number as follows:
+			</h2>
+<pre>
+$ jx --version
+v0.10.32
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  Packaging Code
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+				Consider you have following a project with the following directories where you kept your all the files including Node.js main file index.js and all the modules installed locally.
+			</h2>
+<pre>
+drwxr-xr-x  2 root root  4096 Nov 13 12:42 images
+-rwxr-xr-x  1 root root 30457 Mar  6 12:19 index.htm
+-rwxr-xr-x  1 root root 30452 Mar  1 12:54 index.js
+drwxr-xr-x 23 root root  4096 Jan 15 03:48 node_modules
+drwxr-xr-x  2 root root  4096 Mar 21 06:10 scripts
+drwxr-xr-x  2 root root  4096 Feb 15 11:56 style
+</pre>
+<h2>
+To package the above project, you simply need to go inside this directory and issue the following jx command, assuming index.js is the entry file for your Node.js project:
+</h2>
+<pre>
+$ jx package index.js index
+</pre>
+<h2>
+Here you could have used any other package name instead of index, I used it because I want keep my main file name as index.jx. However, above command will pack everything and will create following two files:
+</h2>
+<div class="list list-inset">
+<div class="item"><b>index.jxp</b> This is an intermediate file whcih contains complete project detail needed to compile the project.</div>
+
+<div class="item"><b>index.jx</b> This is the binary file having complete package and ready to be shipped to your client or in your production environment.</div>
+</div>
+			</div>
+		</div>
+
+		<div class="card animated bounceInDown">
+			<div class="center item item-divider bg-color1">
+			  Launching JX File
+			</div>
+			<div class="item item-text-wrap">
+			<h2>			
+				Consider your orignal Node.js project was running as follows:
+			</h2>
+<pre>
+$ node index.js command_line_arguments
+</pre>
+			<h2>
+			Now after compiling your package using JXcore, it can be started as follows:
+			</h2>
+<pre>
+$ jx index.jx command_line_arguments
+</pre>
+			<h2>
+			For a further detail on JXcore, you can check its official website.
+			</h2>
+			</div>
+		</div>
+	</ion-content>
+	<fab-button-right ui-sref="app.scalingapp" target-id="scrollFabButtonTarget18">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

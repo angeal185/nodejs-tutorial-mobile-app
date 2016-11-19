@@ -1,0 +1,19 @@
+<ion-view view-title="Favourites">
+	<ion-content class="custom_bg" ng-init="getFav()">
+		<ion-list>
+			<span ng-repeat = "fav in favourite track by $index"> 
+			<ion-item ui-sref="{{fav.name}}" href="#" class="white-bg item item-icon-left item-icon-right">
+		      <i class="icon ion-android-bookmark"></i>
+		      {{fav.title}}
+		      <i class="icon ion-chevron-right"></i>
+		      	<ion-option-button class="button-dark option_button" ng-click="showConfirm($index)">
+	              <i class="icon ion-trash-b option_icon"></i>
+	           	</ion-option-button>
+		    </ion-item>
+		    </span>
+		    <div class="vCenter center animated shake" ng-if="favourite.length == '0'" >
+    			<button class="button button-clear"><i class="icon ion-alert-circled"></i> No Favourites.</button>
+    		</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

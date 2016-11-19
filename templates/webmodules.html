@@ -1,0 +1,207 @@
+<ion-view view-title="Web Modules">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget14">
+		<div class="card animated flipInY">
+			<div class="center item item-divider bg-color">
+			  What is Web Server?
+			</div>
+			<div class="item item-text-wrap">
+			   <h2>
+			   	Web Server is a software application which handles HTTP requests sent by the HTTP client, like web browsers, and returns web pages in response to the clients. Web servers usually delivers html documents along with images, style sheets and scripts.
+				<br>
+				Most of the web server support server side scripts using scripting language or redirect to application server which perform the specific task of getting data from database, perform complex logic etc. and then sends a result to the HTTP client through the Web server.
+				<br>
+				Apache web server is one of the most commonly used web server. It is an open source project.
+			   </h2>
+			</div>
+		</div>
+
+		<div class="card animated flipInY">
+			<div class="center item item-divider bg-color">
+			  Web Application Architecture
+			</div>
+			<div class="item item-text-wrap">
+				<h2>
+					A Web application is usually divided into four layers:
+				</h2>
+			   <img class="img-card" ng-src="img/web_architecture.jpg" />
+			   <div class="list list-inset">
+			   		<div class="item"><b>Client</b> - This layer consists of web browsers, mobile browsers or applications which can make HTTP request to the web server.</div>
+			   		<div class="item"><b>Server</b> - This layer consists of Web server which can intercepts the request made by clients and pass them the response.</div>
+			   		<div class="item"><b>Business</b> - This layer consists of application server which is utilized by web server to do required processing. This layer interacts with data layer via data base or some external programs.</div>
+			   		<div class="item"><b>Data</b> - This layer consists of databases or any source of data.</div>
+			   </div>
+			</div>
+		</div>
+
+		<div class="card animated flipInY">
+			<div class="center item item-divider bg-color">
+			  Creating Web Server using Node
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+	    	   Node.js provides http module which can be used to create either HTTP client of server. Following is a bare minimum structure of HTTP server which listens at 8081 port.
+	    	   <br>
+			Create a js file named server.js:
+			<br>
+			File: server.js
+			</h2>
+<pre>
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+
+
+// Create a server
+http.createServer( function (request, response) {  
+   // Parse the request containing file name
+   var pathname = url.parse(request.url).pathname;
+   
+   // Print the name of the file for which request is made.
+   console.log("Request for " + pathname + " received.");
+   
+   // Read the requested file content from file system
+   fs.readFile(pathname.substr(1), function (err, data) {
+      if (err) {
+         console.log(err);
+         // HTTP Status: 404 : NOT FOUND
+         // Content Type: text/plain
+         response.writeHead(404, {'Content-Type': 'text/html'});
+      }else{	
+         //Page found	  
+         // HTTP Status: 200 : OK
+         // Content Type: text/plain
+         response.writeHead(200, {'Content-Type': 'text/html'});	
+         
+         // Write the content of the file to response body
+         response.write(data.toString());		
+      }
+      // Send the response body 
+      response.end();
+   });   
+}).listen(8081);
+
+// Console will print the message
+console.log('Server running at http://127.0.0.1:8081/');
+</pre>
+		<h2>
+		Next let's create following html file named index.htm in the same directory where you created server.js
+
+		File: index.htm
+		</h2>
+<pre>
+<&zwj;html>
+<&zwj;head>
+<&zwj;title>Sample Page<&zwj;/title>	
+<&zwj;/head>
+<&zwj;body>
+Hello World!
+<&zwj;/body>
+<&zwj;/html>
+</pre>
+		<h2>
+		Now let us run the server.js to see the result:
+		</h2>
+<pre>
+$ node server.js
+</pre>
+
+		<h2>
+		Verify the Output
+		</h2>
+<pre>
+Server running at http://127.0.0.1:8081/
+</pre>
+
+		<h2>
+		<b>Make a request to Node.js server</b>
+		<br>
+		Open http://127.0.0.1:8081/index.htm in any browser and see the below result.
+		</h2>
+		<br>
+		<img ng-src="img/nodejs_sample1.jpg" />
+		<br>
+		<h2>
+		Verify the Output at server end.
+		</h2>
+<pre>
+Server running at http://127.0.0.1:8081/
+Request for /index.htm received.
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated flipInY">
+			<div class="center item item-divider bg-color">
+			  Creating Web client using Node
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			   A web client can be created using http module. Let's check the following example.
+			 <br>
+			Create a js file named client.js:
+			<br>
+			<i>File: client.js</i>
+			</h2>
+<pre>
+var http = require('http');
+
+// Options to be used by request 
+var options = {
+   host: 'localhost',
+   port: '8081',
+   path: '/index.htm'  
+};
+
+// Callback function is used to deal with response
+var callback = function(response){
+   // Continuously update stream with data
+   var body = '';
+   response.on('data', function(data) {
+      body += data;
+   });
+   
+   response.on('end', function() {
+      // Data received completely.
+      console.log(body);
+   });
+}
+// Make a request to the server
+var req = http.request(options, callback);
+req.end();
+</pre>
+			<h2>
+			Now run the client.js from a different command terminal other than server.js to see the result:
+			</h2>
+<pre>
+$ node client.js
+</pre>
+			<h2>
+			Verify the Output.
+			</h2>
+<pre>
+<&zwjhtml>
+<&zwjhead>
+<&zwjtitle>Sample Page<&zwj/title>
+<&zwj/head>
+<&zwjbody>
+Hello World!
+<&zwj/body>
+<&zwj/html>
+</pre>
+			<h2>
+			Verify the Output at server end.
+			</h2>
+<pre>
+Server running at http://127.0.0.1:8081/
+Request for /index.htm received.
+</pre>
+			</div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.expressframework" target-id="scrollFabButtonTarget14">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.utilitymodule" target-id="scrollFabButtonTarget14">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>

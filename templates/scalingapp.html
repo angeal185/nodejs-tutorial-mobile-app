@@ -1,0 +1,341 @@
+<ion-view view-title="Scaling Application">
+	<ion-content class="custom_bg" has-bouncing="false" id="scrollFabButtonTarget17">
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color">
+			  Intro
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+				As Node.js runs in a single thread mode but it uses an event-driven paradigm to handle concurrency. It also facilitates creation of child processes to leverage parallel processing on multi-core cpu based systems.
+				<br>
+				Child processes always have three streams child.stdin, child.stdout, and child.stderr which may be shared with the stdio streams of the parent process.
+				<br>
+				Node provides child_process module which has following three major ways to create child process.
+			</h2>
+			<div class="list list-inset">
+				<div class="item"><b>exec</b> - child_process.exec method runs a command in a shell/console and buffers the output.</div>
+				<div class="item"><b>spawn</b> - child_process.spawn launches a new process with a given command</div>
+				<div class="item"><b>fork</b> - The child_process.fork method is a special case of the spawn() to create child processes.</div>
+			</div>
+			</div>
+		</div>
+
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color">
+			  The exec() method
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			child_process.exec method runs a command in a shell and buffers the output. It has the following signature:
+			</h2>
+<pre>
+child_process.exec(command[, options], callback)
+</pre>
+			<h2>
+			<b>Parameters</b><br>
+			Here is the description of the parameters used:
+			</h2>
+			<br>
+			<li>
+			<ol>
+				<b>command</b> String The command to run, with space-separated arguments.	
+			</ol>
+			</li>
+			<br>
+			<li>
+			<ul>
+				<b>options</b> Object may comprise one or more of the following options:
+			</ul>
+			</li>
+			<div class="list list-inset">
+			<div class="item"><b>cwd</b> String Current working directory of the child process</div>
+
+			<div class="item"><b>env</b> Object Environment key-value pairs</div>
+
+			<div class="item"><b>encoding</b> String (Default: 'utf8')</div>
+
+			<div class="item"><b>shell</b> String Shell to execute the command with (Default: '/bin/sh' on UNIX, 'cmd.exe' on Windows, The shell should understand the -c switch on UNIX or /s /c on Windows. On Windows, command line parsing should be compatible with cmd.exe.)</div>
+
+			<div class="item"><b>timeout</b> Number (Default: 0)</div>
+
+			<div class="item"><b>maxBuffer</b> Number (Default: 200*1024)</div>
+
+			<div class="item"><b>killSignal</b> String (Default: 'SIGTERM')</div>
+
+			<div class="item"><b>uid</b> Number Sets the user identity of the process.</div>
+
+			<div class="item"><b>gid</b> Number Sets the group identity of the process.</div>
+
+			<div class="item"><b>callback</b> Function gets three arguments error, stdout and stderr which is called with the following output when process terminates</div>
+
+			</div>
+				<h2>
+				The exec() method returns a buffer with a max size and waits for the process to end and tries to return all the buffered data at once.
+				</h2>
+				<h2>
+				<b>Example</b>
+				<br>
+				Let us create two js file named support.js and master.js:
+				<br>
+				File: support.js
+				</h2>
+<pre>
+console.log("Child Process " + process.argv[2] + " executed." );
+</pre>
+					<h2>
+					File: master.js
+					</h2>
+<pre>
+const fs = require('fs');
+const child_process = require('child_process');
+
+for(var i=0; i<3; i++) {
+   var workerProcess = child_process.exec('node support.js '+i,
+      function (error, stdout, stderr) {
+         if (error) {
+            console.log(error.stack);
+            console.log('Error code: '+error.code);
+            console.log('Signal received: '+error.signal);
+         }
+         console.log('stdout: ' + stdout);
+         console.log('stderr: ' + stderr);
+      });
+
+      workerProcess.on('exit', function (code) {
+      console.log('Child process exited with exit code '+code);
+   });
+}
+</pre>
+				<h2>
+				Now run the master.js to see the result:
+				</h2>
+<pre>
+$ node master.js
+</pre>
+				<h2>
+				Verify the Output. Server has started
+				</h2>
+<pre>
+Child process exited with exit code 0
+stdout: Child Process 1 executed.
+
+stderr:
+Child process exited with exit code 0
+stdout: Child Process 0 executed.
+
+stderr:
+Child process exited with exit code 0
+stdout: Child Process 2 executed.
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color">
+			  The spawn() method
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			child_process.spawn method launches a new process with a given command. It has the following signature:
+			</h2>
+<pre>
+child_process.spawn(command[, args][, options])
+</pre>
+				<h2>
+				<b>Parameters</b>
+				<br>
+				<br>
+				Here is the description of the parameters used:
+				</h2>
+				<br>
+				<li>
+					<ul>
+					<b>command</b> String The command to run
+					</ul>
+				</li>
+				<li>
+				<ul>
+				<b>args</b> Array List of string arguments
+				</ul>
+				</li>
+				<li>
+				<ul>
+				<b>options</b> Object may comprise one or more of the following options:
+				</ul>
+				</li>
+				<br>
+				<div class="list list-inset">
+				<div class="item"><b>cwd</b> String Current working directory of the child process</div>
+
+				<div class="item"><b>env</b> Object Environment key-value pairs</div>
+
+				<div class="item"><b>stdio</b> Array|String Child's stdio configuration</div>
+
+				<div class="item"><b>customFds</b> Array Deprecated File descriptors for the child to use for stdio</div>
+
+				<div class="item"><b>detached</b> Boolean The child will be a process group leader</div>
+
+				<div class="item"><b>uid</b> Number Sets the user identity of the process.</div>
+
+				<div class="item"><b>gid</b> Number Sets the group identity of the process.</div>
+				</div>
+				<h2>
+				The spawn() method returns streams (stdout & stderr) and it should be used when the process returns large amount of data. spawn() starts receiving the response as soon as the process starts executing.
+				</h2>
+				<h2>
+				<b>Example</b><br>
+				Create two js file named support.js and master.js:<br>
+				File: support.js
+				</h2>
+<pre>
+console.log("Child Process " + process.argv[2] + " executed." );
+</pre>
+				<h2>
+				File: master.js
+				</h2>
+<pre>
+const fs = require('fs');
+const child_process = require('child_process');
+ 
+for(var i=0; i<3; i++) {
+   var workerProcess = child_process.spawn('node', ['support.js', i]);
+
+   workerProcess.stdout.on('data', function (data) {
+      console.log('stdout: ' + data);
+   });
+
+   workerProcess.stderr.on('data', function (data) {
+      console.log('stderr: ' + data);
+   });
+
+   workerProcess.on('close', function (code) {
+      console.log('child process exited with code ' + code);
+   });
+}
+</pre>
+				<h2>
+				Now run the master.js to see the result:
+				</h2>
+<pre>
+$ node master.js
+</pre>
+				<h2>
+				Verify the Output. Server has started
+				</h2>
+<pre>
+stdout: Child Process 0 executed.
+
+child process exited with code 0
+stdout: Child Process 1 executed.
+
+stdout: Child Process 2 executed.
+
+child process exited with code 0
+child process exited with code 0
+</pre>
+			</div>
+		</div>
+
+		<div class="card animated bounceInUp">
+			<div class="center item item-divider bg-color">
+			  The fork method
+			</div>
+			<div class="item item-text-wrap">
+			<h2>
+			child_process.fork method is a special case of the spawn() to create Node processes. It has the following signature
+			</h2>
+<pre>
+child_process.fork(modulePath[, args][, options])
+</pre>
+			<h2>
+			<b>Parameters</b>
+			<br>
+			<br>
+			Here is the description of the parameters used:
+			</h2>
+			<li>
+			<ul>
+			<b>modulePath</b> String The module to run in the child
+			</ul>
+			</li>
+
+			<li>
+			<ul>
+			<b>args</b> Array List of string arguments
+			</ul>
+			</li>
+
+			<li>
+			<ul>
+			<b>options</b> Object may comprise one or more of the following options:
+			</ul>
+			</li>
+			<div class="list list-inset">
+			<div class="item"><b>cwd</b> String Current working directory of the child process</div>
+
+			<div class="item"><b>env</b> Object Environment key-value pairs</div>
+
+			<div class="item"><b>execPath</b> String Executable used to create the child process</div>
+
+			<div class="item"><b>execArgv</b> Array List of string arguments passed to the executable (Default: process.execArgv)</div>
+
+			<div class="item"><b>silent</b> Boolean If true, stdin, stdout, and stderr of the child will be piped to the parent, otherwise they will be inherited from the parent, see the "pipe" and "inherit" options for spawn()'s stdio for more details (default is false)</div>
+
+			<div class="item"><b>uid</b> Number Sets the user identity of the process.</div>
+
+			<div class="item"><b>gid</b> Number Sets the group identity of the process.</div>
+			</div>
+			<h2>
+The fork method returns object with a built-in communication channel in addition to having all the methods in a normal ChildProcess instance.
+<br>
+<b>Example</b>
+<br>
+Create two js file named support.js and master.js:
+<br>
+File: support.js
+</h2>
+<pre>
+console.log("Child Process " + process.argv[2] + " executed." );
+</pre>
+<h2>
+File: master.js
+</h2>
+<pre>
+const fs = require('fs');
+const child_process = require('child_process');
+ 
+for(var i=0; i<3; i++) {
+   var worker_process = child_process.fork("support.js", [i]);	
+
+   worker_process.on('close', function (code) {
+      console.log('child process exited with code ' + code);
+   });
+}
+</pre>
+<h2>
+Now run the master.js to see the result:
+</h2>
+<pre>
+$ node master.js
+</pre>
+<h2>
+Verify the Output. Server has started
+</h2>
+<pre>
+Child Process 0 executed.
+Child Process 1 executed.
+Child Process 2 executed.
+child process exited with code 0
+child process exited with code 0
+child process exited with code 0
+</pre>
+			</div>
+		</div>
+	</ion-content>
+	<fab-button ui-sref="app.packaging" target-id="scrollFabButtonTarget17">
+      <i class="icon ion ion-chevron-right"></i>
+    </fab-button>
+    <fab-button-right ui-sref="app.restful" target-id="scrollFabButtonTarget17">
+      <i class="icon ion ion-chevron-left"></i>
+    </fab-button-right>
+</ion-view>
